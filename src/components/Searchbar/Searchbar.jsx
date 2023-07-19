@@ -7,54 +7,45 @@ import {
   SearchFormInput,
 } from './Searchbar.styled';
 import { FcSearch } from 'react-icons/fc';
-const { Component } = require('react');
+const { useState } = require('react');
 
-class Searchbar extends Component {
-  state = {
-    searchWord: '',
-  };
-  handleInputSearch = evt => {
+export function Searchbar({ handleSearch }) {
+  const [searchWord, setSearchWord] = useState('');
+
+  const handleInputSearch = evt => {
     const { value } = evt.currentTarget;
-    this.setState({
-      searchWord: value,
-    });
+    setSearchWord(value);
   };
-  hundelSearchSubmit = evt => {
-    const { searchWord } = this.state;
+  const hundelSearchSubmit = evt => {
     evt.preventDefault();
     if (searchWord.trim() === '') {
       return alert('Input what you search');
     }
-    this.props.handleSearch(this.state);
+    handleSearch(searchWord);
 
-    this.setState({
-      searchWord: '',
-    });
+    setSearchWord('');
   };
-  render() {
-    return (
-      <SearchbarCss>
-        <SearchForm onSubmit={this.hundelSearchSubmit}>
-          <SearchFormBtn type="submit">
-            <FcSearch></FcSearch>
-            <SearchFormBtnLabel>Search</SearchFormBtnLabel>
-          </SearchFormBtn>
 
-          <SearchFormInput
-            type="text"
-            autocomplete="off"
-            autoFocus
-            value={this.state.searchWord}
-            placeholder="Search images and photos"
-            onChange={this.handleInputSearch}
-          />
-        </SearchForm>
-      </SearchbarCss>
-    );
-  }
+  return (
+    <SearchbarCss>
+      <SearchForm onSubmit={hundelSearchSubmit}>
+        <SearchFormBtn type="submit">
+          <FcSearch></FcSearch>
+          <SearchFormBtnLabel>Search</SearchFormBtnLabel>
+        </SearchFormBtn>
+
+        <SearchFormInput
+          type="text"
+          autocomplete="off"
+          autoFocus
+          value={searchWord}
+          placeholder="Search images and photos"
+          onChange={handleInputSearch}
+        />
+      </SearchForm>
+    </SearchbarCss>
+  );
 }
-
-export { Searchbar };
 
 Searchbar.propTypes = {
   handleSearch: PropTypes.func,

@@ -30,7 +30,7 @@ class App extends Component {
     }
   };
 
-  sendSearchSubmit = ({ searchWord }) => {
+  sendSearchSubmit = searchWord => {
     this.setState({
       searchWord: searchWord,
       page: 1,
