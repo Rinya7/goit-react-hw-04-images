@@ -65,6 +65,7 @@ export function App() {
   };
   const closeModal = () => {
     setModal(false);
+    setImageModal('');
   };
 
   return (

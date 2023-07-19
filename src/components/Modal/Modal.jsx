@@ -3,17 +3,17 @@ import { useEffect } from 'react';
 import { ModalCss, Overlay } from './Modal.styled';
 
 export function Modal({ closeModal, children }) {
-  const handelKeyDown = e => {
-    if (e.code === 'Escape') {
-      closeModal();
-    }
-  };
   useEffect(() => {
+    const handelKeyDown = e => {
+      if (e.code === 'Escape') {
+        closeModal();
+      }
+    };
     window.addEventListener('keydown', handelKeyDown);
     return () => {
       window.removeEventListener('keydown', handelKeyDown);
     };
-  }, [() => closeModal()]);
+  }, [closeModal]);
 
   const handleClickOnBackdrop = evt => {
     if (evt.target === evt.currentTarget) {
