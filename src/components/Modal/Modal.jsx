@@ -3,8 +3,6 @@ import { useEffect } from 'react';
 import { ModalCss, Overlay } from './Modal.styled';
 
 export function Modal({ closeModal, children }) {
-  //  const [modal, setModal] = useState(true);
-
   const handelKeyDown = e => {
     if (e.code === 'Escape') {
       closeModal();
